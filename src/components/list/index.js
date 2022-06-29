@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as S from "./styled";
 import Item from "../items";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import Sortable from "sortablejs";
 
 const List = ({ list, index, lists, setLists, onDelete }) => {
   const [show, setShow] = useState(false);
@@ -22,12 +23,22 @@ const List = ({ list, index, lists, setLists, onDelete }) => {
     setLists(itensCopy);
     handleClose();
   };
+
+  // useEffect(() => {
+  //   var element = document.getElementById("item");
+  //   new Sortable(element, {
+  //     group: "element",
+  //   });
+  // }, []);
+
   return (
     <>
-      <S.List>
+      <S.List id="item">
         <S.ListHeader id="headerList">
           <S.MoveIcon>
-            <i class="ai-more-horizontal-fill"></i>
+            <a>
+              <i class="ai-more-horizontal-fill"></i>
+            </a>
           </S.MoveIcon>
           <S.ListName>{list}</S.ListName>
           <S.RemoveIcon onClick={onDelete}>

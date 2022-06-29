@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import List from "../list";
 import * as S from "./styled";
+import Sortable from "sortablejs";
 
 const Form = () => {
   const [text, setText] = useState();
@@ -32,6 +33,13 @@ const Form = () => {
     setLists(removeList);
   };
 
+  useEffect(() => {
+    var element = document.getElementById("listItems");
+    new Sortable(element, {
+      group: "element",
+    });
+  }, []);
+
   return (
     <S.FormList>
       <form>
@@ -45,16 +53,19 @@ const Form = () => {
           <i class="ai-plus"></i>
         </S.Button>
       </form>
+
       <ul className="list-group">
-        {lists.map((list, index) => (
-          <List
-            lists={lists}
-            list={list}
-            index={index}
-            setLists={setLists}
-            onDelete={() => handleDeleteList(index)}
-          />
-        ))}
+        <div id="listItems">
+          {lists.map((list, index) => (
+            <List
+              lists={lists}
+              list={list}
+              index={index}
+              setLists={setLists}
+              onDelete={() => handleDeleteList(index)}
+            />
+          ))}
+        </div>
       </ul>
     </S.FormList>
   );
