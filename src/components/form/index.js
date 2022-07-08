@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import List from "../list";
 import * as S from "./styled";
 import Sortable from "sortablejs";
-import { v4 as uuidv4 } from "uuid";
 
 const Form = () => {
   const [text, setText] = useState();
@@ -19,7 +18,6 @@ const Form = () => {
 
     const data = { text };
     const modelStorage = {
-      id: uuidv4(),
       nome: data,
     };
     idList = modelStorage.id;
