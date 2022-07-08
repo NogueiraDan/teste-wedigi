@@ -4,9 +4,8 @@ import Item from "../items";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import Sortable from "sortablejs";
 
-const List = ({ list, index, lists, setLists, onDelete }) => {
+const List = ({ indexList, lists, list, setLists, onDelete }) => {
   const [show, setShow] = useState(false);
   const [text, setText] = useState();
   const handleClose = () => setShow(false);
@@ -23,13 +22,6 @@ const List = ({ list, index, lists, setLists, onDelete }) => {
     setLists(itensCopy);
     handleClose();
   };
-
-  // useEffect(() => {
-  //   var element = document.getElementById("item");
-  //   new Sortable(element, {
-  //     group: "element",
-  //   });
-  // }, []);
 
   return (
     <>
@@ -74,7 +66,7 @@ const List = ({ list, index, lists, setLists, onDelete }) => {
         </S.ListHeader>
 
         <ul className="items-group">
-          <Item />
+          <Item indexList={indexList} />
         </ul>
       </S.List>
     </>

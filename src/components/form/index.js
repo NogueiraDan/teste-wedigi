@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import List from "../list";
 import * as S from "./styled";
 import Sortable from "sortablejs";
+import { v4 as uuidv4 } from "uuid";
 
 const Form = () => {
   const [text, setText] = useState();
   const [lists, setLists] = useState([]);
+  let idList;
 
   const handleChangeInput = (event) => {
     const inputText = event.target.value;
@@ -16,14 +18,23 @@ const Form = () => {
     setLists([...lists, text]);
 
     const data = { text };
+    const modelStorage = {
+      id: uuidv4(),
+      nome: data,
+    };
+    idList = modelStorage.id;
     if (localStorage.getItem("list") === null) {
-      localStorage.setItem("list", JSON.stringify([data]));
+      localStorage.setItem("list", JSON.stringify([modelStorage]));
     } else {
       localStorage.setItem(
         "list",
-        JSON.stringify([...JSON.parse(localStorage.getItem("list")), data])
+        JSON.stringify([
+          ...JSON.parse(localStorage.getItem("list")),
+          modelStorage,
+        ])
       );
     }
+    console.log(`Id da lista ${modelStorage.nome} é: ${idList}`);
     setText("");
   };
 
@@ -58,9 +69,9 @@ const Form = () => {
         <div id="listItems">
           {lists.map((list, index) => (
             <List
+              indexList={index}
               lists={lists}
               list={list}
-              index={index}
               setLists={setLists}
               onDelete={() => handleDeleteList(index)}
             />

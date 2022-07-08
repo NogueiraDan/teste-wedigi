@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import * as S from "./styled";
-const Item = () => {
+
+const Item = ({ indexList }) => {
   const [text, setText] = useState();
   const [items, setItems] = useState([]);
+  let idItem = indexList;
 
   const handleChangeInput = (event) => {
     const inputItem = event.target.value;
@@ -13,14 +15,22 @@ const Item = () => {
     event.preventDefault();
     setItems([...items, text]);
     const data = { text };
+    const modelStorage = {
+      listKey: idItem,
+      nome: data,
+    };
     if (localStorage.getItem("item") === null) {
-      localStorage.setItem("item", JSON.stringify([data]));
+      localStorage.setItem("item", JSON.stringify([modelStorage]));
     } else {
       localStorage.setItem(
         "item",
-        JSON.stringify([...JSON.parse(localStorage.getItem("item")), data])
+        JSON.stringify([
+          ...JSON.parse(localStorage.getItem("item")),
+          modelStorage,
+        ])
       );
     }
+    console.log(`Id do ITEM ${modelStorage.nome} é: ${idItem}`);
     setText("");
   };
   const handleDeleteList = (key) => {

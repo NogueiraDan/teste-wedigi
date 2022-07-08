@@ -6,7 +6,7 @@ export const Footer = styled.div`
   width: 100%;
   text-align: center;
   height: 50px;
-  margin-top: 30%;
+  margin-top: 31%;
 `;
 export const Text = styled.p`
   color: black;
