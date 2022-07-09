@@ -20,6 +20,7 @@ const List = ({ indexList, lists, list, setLists, onDelete }) => {
     const itensCopy = Array.from(lists);
     itensCopy.splice(index, 1, text);
     setLists(itensCopy);
+    localStorage.setItem("list", JSON.stringify(itensCopy));
     handleClose();
   };
 

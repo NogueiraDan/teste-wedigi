@@ -10,6 +10,13 @@ const Form = () => {
   const getLists = JSON.parse(localStorage.getItem("list"));
 
   useEffect(() => {
+    var element = document.getElementById("listItems");
+    new Sortable(element, {
+      group: "element",
+    });
+  }, []);
+
+  useEffect(() => {
     if (getLists == null) {
       setLists([]);
     } else {
@@ -52,13 +59,6 @@ const Form = () => {
     console.log(removeList);
     localStorage.setItem("list", JSON.stringify(removeList));
   };
-
-  useEffect(() => {
-    var element = document.getElementById("listItems");
-    new Sortable(element, {
-      group: "element",
-    });
-  }, []);
 
   return (
     <S.FormList>
