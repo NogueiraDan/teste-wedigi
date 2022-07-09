@@ -38,9 +38,9 @@ const List = ({ index, lists, list, setLists, onDelete }) => {
             <i class="ai-trash-can"></i>
           </S.RemoveIcon>
 
-          <span onClick={handleShow}>
+          <S.EditIcon onClick={handleShow}>
             <i class="ai-pencil"></i>
-          </span>
+          </S.EditIcon>
           <Modal show={show} onHide={handleClose}>
             <Modal.Body>
               <Form>

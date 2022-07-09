@@ -36,6 +36,15 @@ export const Item = styled.span`
   font-size: 16px;
 `;
 
+export const EditIcon = styled.span`
+  &:hover {
+    color: blue;
+  }
+`;
+
 export const RemoveIcon = styled.span`
-  flex-grow: 0;
+  flex-grow: 0.02;
+  &:hover {
+    color: red;
+  }
 `;

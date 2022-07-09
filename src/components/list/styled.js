@@ -27,7 +27,16 @@ export const ListName = styled.span`
 `;
 
 export const RemoveIcon = styled.span`
-  flex-grow: 0;
+  flex-grow: 0.5;
+  &:hover {
+    color: red;
+  }
+`;
+
+export const EditIcon = styled.span`
+  &:hover {
+    color: blue;
+  }
 `;
 
 export const MoveIcon = styled.span`
