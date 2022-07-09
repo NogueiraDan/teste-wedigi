@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import * as S from "./styled";
+import Swal from "sweetalert2";
 
 const Item = ({ indexList }) => {
   const [text, setText] = useState();
@@ -13,25 +14,33 @@ const Item = ({ indexList }) => {
 
   const handleAddItem = (event) => {
     event.preventDefault();
-    setItems([...items, text]);
-    const data = { text };
-    const modelStorage = {
-      listKey: idItem,
-      nome: data,
-    };
-    if (localStorage.getItem("item") === null) {
-      localStorage.setItem("item", JSON.stringify([modelStorage]));
+    if (!text) {
+      Swal.fire({
+        icon: "error",
+        title: "Erro",
+        text: "Não é possível adicionar listas em branco",
+      });
     } else {
-      localStorage.setItem(
-        "item",
-        JSON.stringify([
-          ...JSON.parse(localStorage.getItem("item")),
-          modelStorage,
-        ])
-      );
+      setItems([...items, text]);
+      const data = { text };
+      const modelStorage = {
+        listKey: idItem,
+        nome: data,
+      };
+      if (localStorage.getItem("item") === null) {
+        localStorage.setItem("item", JSON.stringify([modelStorage]));
+      } else {
+        localStorage.setItem(
+          "item",
+          JSON.stringify([
+            ...JSON.parse(localStorage.getItem("item")),
+            modelStorage,
+          ])
+        );
+      }
+      console.log(`Id do ITEM ${modelStorage.nome} é: ${idItem}`);
+      setText("");
     }
-    console.log(`Id do ITEM ${modelStorage.nome} é: ${idItem}`);
-    setText("");
   };
   const handleDeleteList = (key) => {
     const removeList = Array.from(items);

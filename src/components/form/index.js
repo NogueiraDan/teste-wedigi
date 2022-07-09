@@ -2,11 +2,20 @@ import React, { useState, useEffect } from "react";
 import List from "../list";
 import * as S from "./styled";
 import Sortable from "sortablejs";
+import Swal from "sweetalert2";
 
 const Form = () => {
   const [text, setText] = useState();
   const [lists, setLists] = useState([]);
-  let idList;
+  const getLists = JSON.parse(localStorage.getItem("list"));
+
+  useEffect(() => {
+    if (getLists == null) {
+      setLists([]);
+    } else {
+      setLists(getLists);
+    }
+  }, []);
 
   const handleChangeInput = (event) => {
     const inputText = event.target.value;
@@ -14,32 +23,34 @@ const Form = () => {
   };
   const handleAddList = (event) => {
     event.preventDefault();
-    setLists([...lists, text]);
-
-    const data = { text };
-    const modelStorage = {
-      nome: data,
-    };
-    idList = modelStorage.id;
-    if (localStorage.getItem("list") === null) {
-      localStorage.setItem("list", JSON.stringify([modelStorage]));
+    if (!text) {
+      Swal.fire({
+        icon: "error",
+        title: "Erro",
+        text: "Não é possível adicionar listas em branco",
+      });
     } else {
-      localStorage.setItem(
-        "list",
-        JSON.stringify([
-          ...JSON.parse(localStorage.getItem("list")),
-          modelStorage,
-        ])
-      );
+      setLists([...lists, text]);
+
+      const data = text;
+      if (localStorage.getItem("list") === null) {
+        localStorage.setItem("list", JSON.stringify([data]));
+      } else {
+        localStorage.setItem(
+          "list",
+          JSON.stringify([...JSON.parse(localStorage.getItem("list")), data])
+        );
+      }
+      setText("");
     }
-    console.log(`Id da lista ${modelStorage.nome} é: ${idList}`);
-    setText("");
   };
 
   const handleDeleteList = (index) => {
     const removeList = Array.from(lists);
     removeList.splice(index, 1);
     setLists(removeList);
+    console.log(removeList);
+    localStorage.setItem("list", JSON.stringify(removeList));
   };
 
   useEffect(() => {
