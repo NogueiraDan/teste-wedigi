@@ -21,12 +21,12 @@ const Item = ({ indexList }) => {
   };
 
   // Alterando titulo da sublista
-  const handleUpdateItem = (index) => {
-    console.log(index);
+  const handleUpdateItem = (key) => {
+    console.log(`AQUI A KEY ${key}`);
     const itensCopy = Array.from(items);
-    itensCopy.splice(index, 1, textModal);
+    itensCopy.splice(key, 1, textModal);
     setItems(itensCopy);
-    localStorage.setItem("item", JSON.stringify(itensCopy));
+    //localStorage.setItem("item", JSON.stringify(itensCopy));
     setTextModal("");
     handleClose();
   };
@@ -64,11 +64,11 @@ const Item = ({ indexList }) => {
           ])
         );
       }
-
       setText("");
     }
-    console.log(items);
   };
+
+  console.log(items);
 
   // Removendo sublista da lista
   const handleDeleteList = (key) => {
@@ -91,11 +91,11 @@ const Item = ({ indexList }) => {
         </S.Button>
       </S.ItemContent>
 
-      {items.map((item, index) => (
+      {items.map((item, key) => (
         <S.MapItems>
           <S.Item>{item}</S.Item>
 
-          <S.RemoveIcon onClick={() => handleDeleteList(index)}>
+          <S.RemoveIcon onClick={() => handleDeleteList(key)}>
             <i class="ai-trash-can"></i>
           </S.RemoveIcon>
 
@@ -121,7 +121,7 @@ const Item = ({ indexList }) => {
               <Button variant="secondary" onClick={handleClose}>
                 Cancelar
               </Button>
-              <Button variant="primary" onClick={() => handleUpdateItem(index)}>
+              <Button variant="primary" onClick={() => handleUpdateItem(key)}>
                 Salvar
               </Button>
             </Modal.Footer>
