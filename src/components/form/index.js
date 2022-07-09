@@ -78,7 +78,7 @@ const Form = () => {
         <div id="listItems">
           {lists.map((list, index) => (
             <List
-              indexList={index}
+              index={index}
               lists={lists}
               list={list}
               setLists={setLists}

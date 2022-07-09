@@ -5,7 +5,7 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-const List = ({ indexList, lists, list, setLists, onDelete }) => {
+const List = ({ index, lists, list, setLists, onDelete }) => {
   const [show, setShow] = useState(false);
   const [text, setText] = useState();
   const handleClose = () => setShow(false);
@@ -59,7 +59,7 @@ const List = ({ indexList, lists, list, setLists, onDelete }) => {
               <Button variant="secondary" onClick={handleClose}>
                 Cancelar
               </Button>
-              <Button variant="primary" onClick={handleUpdateList}>
+              <Button variant="primary" onClick={() => handleUpdateList(index)}>
                 Salvar
               </Button>
             </Modal.Footer>
@@ -67,7 +67,7 @@ const List = ({ indexList, lists, list, setLists, onDelete }) => {
         </S.ListHeader>
 
         <ul className="items-group">
-          <Item indexList={indexList} />
+          <Item indexList={index} />
         </ul>
       </S.List>
     </>
