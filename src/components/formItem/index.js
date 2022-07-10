@@ -48,13 +48,6 @@ const FormItem = ({ indexList }) => {
     }
   };
 
-  // // Remoção de item da sublista
-  // const handleDeleteItem = (index) => {
-  //   console.log(index);
-  //   setItems(items.splice(index, 1));
-  //   console.log(items);
-  // };
-
   return (
     <>
       <S.ItemContent>

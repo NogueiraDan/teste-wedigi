@@ -33,8 +33,8 @@ const Item = ({ index, items, item, setItems }) => {
     const deleteItem = items.filter((item) => item.id != id);
     setItems(deleteItem);
     console.log(deleteItem);
-    // setItems(items.splice(index, 1));
-    // console.log(items);
+    console.log(items);
+    localStorage.setItem("item", JSON.stringify(deleteItem));
   };
 
   if (index == 0) {
