@@ -1,15 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import * as S from "./styled";
 import FormItem from "../formItem";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-const List = ({ index, lists, list, setLists, onDelete }) => {
+const List = ({ index, lists, list, setLists }) => {
   const [show, setShow] = useState(false);
   const [text, setText] = useState();
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const getChildrenItens = JSON.parse(localStorage.getItem("item"));
+
+  useEffect(() => {
+    if (getChildrenItens == null) {
+      console.log({ getChildrenItens });
+    } else {
+      console.log({ getChildrenItens });
+    }
+  }, [list, lists]);
 
   const handleChangetitle = (event) => {
     const inputTitle = event.target.value;
@@ -24,6 +33,19 @@ const List = ({ index, lists, list, setLists, onDelete }) => {
     handleClose();
   };
 
+  const handleDeleteList = (index) => {
+    const removeList = Array.from(lists);
+    removeList.splice(index, 1);
+    setLists(removeList);
+    console.log(removeList);
+    localStorage.setItem("list", JSON.stringify(removeList));
+    const deleteItem = getChildrenItens.filter(
+      (children) => children.listKey != index
+    );
+    console.log(deleteItem);
+    localStorage.setItem("item", JSON.stringify(deleteItem));
+  };
+
   return (
     <>
       <S.List id="item">
@@ -34,7 +56,7 @@ const List = ({ index, lists, list, setLists, onDelete }) => {
             </a>
           </S.MoveIcon>
           <S.ListName>{list}</S.ListName>
-          <S.RemoveIcon onClick={onDelete}>
+          <S.RemoveIcon onClick={() => handleDeleteList(index)}>
             <i class="ai-trash-can"></i>
           </S.RemoveIcon>
 

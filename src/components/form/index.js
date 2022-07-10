@@ -56,13 +56,13 @@ const Form = () => {
   };
 
   // Deletando Lista
-  const handleDeleteList = (index) => {
-    const removeList = Array.from(lists);
-    removeList.splice(index, 1);
-    setLists(removeList);
-    console.log(removeList);
-    localStorage.setItem("list", JSON.stringify(removeList));
-  };
+  // const handleDeleteList = (index) => {
+  //   const removeList = Array.from(lists);
+  //   removeList.splice(index, 1);
+  //   setLists(removeList);
+  //   console.log(removeList);
+  //   localStorage.setItem("list", JSON.stringify(removeList));
+  // };
 
   return (
     <S.FormList>
@@ -81,13 +81,7 @@ const Form = () => {
       <ul className="list-group">
         <div id="listItems">
           {lists.map((list, index) => (
-            <List
-              index={index}
-              lists={lists}
-              list={list}
-              setLists={setLists}
-              onDelete={() => handleDeleteList(index)}
-            />
+            <List index={index} lists={lists} list={list} setLists={setLists} />
           ))}
         </div>
       </ul>
