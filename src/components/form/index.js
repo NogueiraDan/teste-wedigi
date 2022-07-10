@@ -16,6 +16,7 @@ const Form = () => {
     });
   }, []);
 
+  // Buscando os registros salvos no LocalStorage
   useEffect(() => {
     if (getLists == null) {
       setLists([]);
@@ -24,10 +25,12 @@ const Form = () => {
     }
   }, []);
 
+  // Capturando campo do titulo da lista
   const handleChangeInput = (event) => {
     const inputText = event.target.value;
     setText(inputText);
   };
+  // Adicionando Lista
   const handleAddList = (event) => {
     event.preventDefault();
     if (!text) {
@@ -52,6 +55,7 @@ const Form = () => {
     }
   };
 
+  // Deletando Lista
   const handleDeleteList = (index) => {
     const removeList = Array.from(lists);
     removeList.splice(index, 1);

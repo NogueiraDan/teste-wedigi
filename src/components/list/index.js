@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import * as S from "./styled";
-import Item from "../items";
+import FormItem from "../formItem";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -67,7 +67,7 @@ const List = ({ index, lists, list, setLists, onDelete }) => {
         </S.ListHeader>
 
         <ul className="items-group">
-          <Item indexList={index} />
+          <FormItem indexList={index} />
         </ul>
       </S.List>
     </>
