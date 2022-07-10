@@ -21,6 +21,8 @@ const Item = ({ index, items, item, setItems }) => {
     const itemUpdated = items.find((element) => element.id == id);
     itemUpdated.nome = textModal;
     console.log(itemUpdated);
+    localStorage.setItem("item", JSON.stringify(items));
+    console.log(items);
     console.log(index);
     setTextModal("");
     handleClose();
