@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import * as S from "./styled";
 import Swal from "sweetalert2";
+import { v4 as uuidv4 } from "uuid";
 import Item from "../items";
 
 const FormItem = ({ indexList }) => {
   const [text, setText] = useState();
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState([{}]);
 
   // Setando estado do input do titulo
   const handleChangeInput = (event) => {
@@ -23,14 +24,17 @@ const FormItem = ({ indexList }) => {
         text: "Não é possível adicionar listas em branco",
       });
     } else {
-      setItems([...items, text]);
-      const data = { text };
+      //setItems([...items, text]);
+      const data = text;
       const modelStorage = {
         listKey: indexList,
+        id: uuidv4(),
         nome: data,
       };
+      setItems([...items, modelStorage]);
       if (localStorage.getItem("item") === null) {
         localStorage.setItem("item", JSON.stringify([modelStorage]));
+        console.log(modelStorage.id);
       } else {
         localStorage.setItem(
           "item",
@@ -45,10 +49,10 @@ const FormItem = ({ indexList }) => {
   };
 
   // Remoção de item da sublista
-  const handleDeleteList = (index) => {
-    const removeList = Array.from(items);
-    removeList.splice(index, 1);
-    setItems(removeList);
+  const handleDeleteItem = (index) => {
+    console.log(index);
+    setItems(items.splice(index, 1));
+    console.log(items);
   };
 
   return (
@@ -67,11 +71,12 @@ const FormItem = ({ indexList }) => {
 
       {items.map((item, index) => (
         <Item
+          key={item.id}
           index={index}
           items={items}
           item={item}
           setItems={setItems}
-          onDelete={() => handleDeleteList(index)}
+          onDelete={() => handleDeleteItem(index)}
         />
       ))}
     </>

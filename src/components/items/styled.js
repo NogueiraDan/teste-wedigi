@@ -36,6 +36,11 @@ export const Item = styled.span`
   font-size: 16px;
 `;
 
+export const SubTitle = styled.h6`
+  margin-top: 20px;
+  margin-left: -20px;
+`;
+
 export const EditIcon = styled.span`
   &:hover {
     color: blue;
