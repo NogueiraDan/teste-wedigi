@@ -4,7 +4,7 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-const Item = ({ index, items, item, setItems, onDelete }) => {
+const Item = ({ index, items, item, setItems }) => {
   const [textModal, setTextModal] = useState("");
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -26,6 +26,15 @@ const Item = ({ index, items, item, setItems, onDelete }) => {
     handleClose();
   };
 
+  // Remoção de item da sublista
+  const handleDeleteItem = (id, index) => {
+    const deleteItem = items.filter((item) => item.id != id);
+    setItems(deleteItem);
+    console.log(deleteItem);
+    // setItems(items.splice(index, 1));
+    // console.log(items);
+  };
+
   if (index == 0) {
     return (
       <S.SubTitle>
@@ -38,7 +47,7 @@ const Item = ({ index, items, item, setItems, onDelete }) => {
         <S.MapItems>
           <S.Item>{item.nome}</S.Item>
 
-          <S.RemoveIcon onClick={onDelete}>
+          <S.RemoveIcon onClick={() => handleDeleteItem(item.id, index)}>
             <i class="ai-trash-can"></i>
           </S.RemoveIcon>
 
