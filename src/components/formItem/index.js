@@ -7,7 +7,17 @@ import Item from "../items";
 const FormItem = ({ indexList }) => {
   const [text, setText] = useState();
   const [items, setItems] = useState([{}]);
+  const getItems = JSON.parse(localStorage.getItem("item"));
 
+  useEffect(() => {
+    console.log("ITEMS do LocalStorage");
+    console.log(getItems);
+    if (getItems == null) {
+      setItems([{}]);
+    } else {
+      setItems(getItems);
+    }
+  }, []);
   // Setando estado do input do titulo
   const handleChangeInput = (event) => {
     const inputItem = event.target.value;
